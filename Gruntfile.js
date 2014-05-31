@@ -2,10 +2,10 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
 
-        ver     : grunt.file.readJSON('ver.json'),
-        module  : grunt.file.readJSON('module.json'),
+        ver     : grunt.file.readJSON('ver.json'),          // project version
+        module  : grunt.file.readJSON('module.json'),       // project js css module
 
-        // 压缩js文件
+        // merge minify js
         uglify: {
 
             app: {
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         },
 
 
-        // 合并压缩css文件
+        // merge minify css
         cssmin: {
 
             app: {
@@ -35,7 +35,7 @@ module.exports = function(grunt) {
 
         },
 
-        // 替换版本号
+        // replace string
         replace: {
 
             app: {
@@ -60,13 +60,13 @@ module.exports = function(grunt) {
                     ]
                 },
                 files: [
-                    { expand: true, flatten: true, src: ['views/app/*'], dest: 'html/tmp/app/' }
+                    { expand: true, flatten: true, src: ['views/app/*'], dest: 'html/.tmp/app/' }
                 ]
             }
 
         },
 
-        // 压缩html
+        // minify html
         htmlmin: {
 
             app: {
@@ -77,19 +77,19 @@ module.exports = function(grunt) {
                 },
 
                 files: {
-                    'html/app/index.html': 'html/tmp/app/index.html'
+                    'html/app/index.html': 'html/.tmp/app/index.html'
                 }
 
             }
 
         },
 
-        // 测试html
+        // process test html
         processhtml: {
 
             app: {
                 files: {
-                    'test/app/index.html': ['views/app/index.html']
+                    'html/app/index.html': ['views/app/index.html']
                 }
             }
 
@@ -97,19 +97,19 @@ module.exports = function(grunt) {
 
     });
 
-
+    // grunt plugin
     grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-processhtml');
 
-    // 正式环境使用 all 任务包含全部生成任务
+    // for production 
     grunt.registerTask('app', ['uglify:app']);
     grunt.registerTask('css', ['cssmin:app']);
     grunt.registerTask('html', ['replace:app', 'htmlmin:app']);
     grunt.registerTask('all', ['uglify:app', 'cssmin:app', 'replace:app', 'htmlmin:app']);
 
-    // 测试环境使用
+    // for development
     grunt.registerTask('test', ['processhtml:app']);
 };
