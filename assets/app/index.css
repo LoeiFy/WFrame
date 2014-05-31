@@ -1,0 +1,14 @@
+h1 {
+    text-align: center;
+    margin-top: 20%;
+}
+
+div {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ddd;
+}
+
+.active {
+    background: #59c8ec;
+}

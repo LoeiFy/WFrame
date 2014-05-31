@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>app test</title>
+    
+    <!-- build:css /assets/module/css/base.css -->
+    <!-- /build -->
+
+    <!-- build:css /assets/module/css/global.css -->
+    <!-- /build -->
+
+    <!-- build:css /assets/app/index.css -->
+    <!-- /build -->
+
+    <!-- build:js /static/zepto/zepto.js -->
+    <!-- /build -->
+
+    <!-- build:js /assets/module/js/base.js -->
+    <!-- /build -->
+
+    <!-- build:js /assets/module/js/touch.js -->
+    <!-- /build -->
+
+    <!-- build:js /assets/app/index.js -->
+    <!-- /build -->
+
+    <!-- build:remove -->
+    <style>@@style</style>
+    <script src="/static/basket/basket.js?000"></script>
+    <script>basket.require({url:'/dist/css/global.css',key:'css',unique:@@css,execute:false}).then(function(responses){_stylesheet.appendStyleSheet(responses[0],function(){basket.require({url:'/static/zepto/zepto.js',key:'zepto',unique:@@zepto}).then(function(){basket.require({url:'/dist/app/index.js',key:'index',unique:@@index})})})})</script>
+    <!-- /build -->
+</head>
+<body>
+    <h1>test page</h1>
+    <div>one</div>
+    <div>two</div>
+    <div>three</div>
+</body>
+</html>
