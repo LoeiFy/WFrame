@@ -1,20 +1,20 @@
 {
-  "name": "ffffff",
-  "description": "ffffff",
+  "name": "WFrame",
+  "description": "WFrame",
   "version": "0.0.0",
   "main": "Gruntfile.js",
   "devDependencies": {
-    "grunt": "~0.4.2",
-    "grunt-contrib-uglify": "~0.4.0",
-    "grunt-contrib-cssmin": "~0.9.0",
-    "grunt-contrib-htmlmin": "~0.2.0",
-    "grunt-replace": "~0.7.7",
-    "grunt-processhtml": "~0.3.3"
+    "grunt": "^0.4.5",
+    "grunt-contrib-cssmin": "^0.9.0",
+    "grunt-contrib-htmlmin": "^0.3.0",
+    "grunt-contrib-uglify": "^0.4.0",
+    "grunt-processhtml": "^0.3.3",
+    "grunt-replace": "^0.7.7"
   },
   "repository": {
     "type": "git",
-    "url": "git@git.umlife.net:lifei/ffffff.git"
+    "url": "git@github.com:LoeiFy/WFrame.git"
   },
-  "author": "lifei@youmi.net",
+  "author": "LoeiFy@gmail.com",
   "license": "MIT"
 }
