@@ -1,5 +1,12 @@
 # WFrame - A font-end frame base on grunt & basket.js
 
+## example project 
+ 
+http://lorem.in
+
+________________________________________________________
+
+
 `mobile app(webview)`
 
 - improve performance -- for production : grunt merge minfy js css files and basket.js caches script and css files width localstorage
@@ -50,7 +57,12 @@ you will note that page display without style and then soon with style (blink) i
 
 `basket.js` ------- http://addyosmani.github.io/basket.js/
 
-##### P.S
+##### note
 
-My english is poor
+this frame is bulid for small, medium or personal project 
+
+
+________________________________________________________
+
+* sorry that my english is poor
 
