@@ -4,6 +4,6 @@
     },
 
     "css": {
-        "app.css": "global.css"
+        "app": "app.css, global.css"
     }
 }

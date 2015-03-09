@@ -73,7 +73,7 @@ module.exports = function(grunt) {
 
             app: {
                 options: {
-                    patterns: [{json: version}, {match: 'style', '<%= grunt.file.read("assets/module/css/base.css") %>'}]
+                    patterns: [{json: version}, {match: 'style', replacement: '<%= grunt.file.read("assets/module/css/base.css") %>'}]
                 },
                 files: [{
                     expand: true, 

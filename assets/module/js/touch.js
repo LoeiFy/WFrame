@@ -5,29 +5,31 @@
  * 
  */
 
-Util.touch = function(tag) {
+Util.touch = function(tags) {
 
-    tag = document.getElementsByClassName(tag);
+    tags = document.getElementsByClassName(tags);
 
-    for (var i = 0; i < tag.length; i ++) {
+    for (var i = 0; i < tags.length; i ++) {
 
-        on(tag[i], 'touchstart mouseover', function() {
+        on(tags[i], 'touchstart mouseover', tgClass(tags[i]))
 
-            for (var j = 0; j < tag.length; j ++) {
-
-                tag[j].classList.remove('active')
-
-            }
-
-            this.classList.add('active')
-
-        })
-
-        on(tag[i], 'touchmove touchend touchcancle mouseout', function() {
+        on(tags[i], 'touchmove touchend touchcancle mouseout', function() {
 
             this.classList.remove('active')
 
         })
+
+    }
+
+    function tgClass(tag) {
+
+        for (var i = 0; i < tag.length; i ++) {
+
+            tags[i].classList.remove('active')
+
+        }
+
+        tag.classList.add('active')
 
     }
 
