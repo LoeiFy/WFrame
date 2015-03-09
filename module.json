@@ -1,5 +1,0 @@
-{
-	"css"		: "assets/module/css/global.css",
-    "base"      : "assets/module/js/base.js",
-    "touch"     : "assets/module/js/touch.js"
-}

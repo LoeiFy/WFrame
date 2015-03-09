@@ -1,1 +1,7 @@
+/*
+ * we need define some css to avoid html page blink
+ * most of the css (global.css) load by javascript (basket.js)
+ *
+ */
+
 div, h1{visibility:hidden;}

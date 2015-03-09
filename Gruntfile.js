@@ -1,20 +1,30 @@
+// return js module path
+var resPath = function(path, res) {
+    var s = '';
+    res = res.replace(/\s/g, '').split(',');
+    for (var i = 0; i < res.length; i ++) {
+        s += path + res[i] + (i == res.length - 1 ? '' : ',');
+    }
+    return s.split(',')
+}
+
 module.exports = function(grunt) {
 
-    grunt.initConfig({
+    var module = grunt.file.readJSON('deploy/module.json'),         // js modules
+        version = grunt.file.readJSON('deploy/version.json');       // version
 
-        ver     : grunt.file.readJSON('ver.json'),          // project version
-        module  : grunt.file.readJSON('module.json'),       // project js css module
+    grunt.initConfig({
 
         // merge minify js
         uglify: {
 
+            options: {
+                banner: '/** @preserve Copyright ... All Rights Reserved.*/\n'
+            },
+
             app: {
                 files: {
-                    'dist/app/index.js': [
-                        '<%= module.base %>',
-                        '<%= module.touch %>',
-                        'assets/app/index.js'
-                    ]
+                    'dist/app/app.js': resPath('assets/module/js/', module.js.app).concat('assets/app/app.js')
                 }
             }
 
@@ -25,12 +35,35 @@ module.exports = function(grunt) {
         cssmin: {
 
             app: {
+
+                options: {
+                    banner: '/** @preserve Copyright ... All Rights Reserved. */\n'
+                },
+
                 files: {
-                    'dist/css/global.css': [
-                        '<%= module.css %>',
-                        'assets/app/index.css'
-                    ]
+                    'dist/app/app.css': resPath('assets/module/css/', module.css.app).concat('assets/app/app.css')
                 }
+            }
+
+        },
+
+        // merge css and js
+        concat: {
+
+            js: {
+
+                files: {
+                    'dist/app/app.js': resPath('assets/module/js/', module.js.app)
+                }
+
+            },
+
+            css: {
+
+                files: {
+                    'dist/app/app.css': resPath('assets/module/css/', module.css.app)
+                }
+
             }
 
         },
@@ -40,28 +73,28 @@ module.exports = function(grunt) {
 
             app: {
                 options: {
-                    patterns: [
-                        {
-                            match: 'style',
-                            replacement: '<%= grunt.file.read("assets/module/css/base.css") %>'
-                        },
-                        {
-                            match: 'zepto',
-                            replacement: '<%= ver.zepto %>'
-                        },
-                        {
-                            match: 'css',
-                            replacement: '<%= ver.css %>'
-                        },
-                        {
-                            match: 'index',
-                            replacement: '<%= ver.app.index %>'
-                        }
-                    ]
+                    patterns: [{json: version}, {match: 'style', '<%= grunt.file.read("assets/module/css/base.css") %>'}]
                 },
-                files: [
-                    { expand: true, flatten: true, src: ['views/app/*'], dest: 'html/.tmp/app/' }
-                ]
+                files: [{
+                    expand: true, 
+                    cwd: 'views/app/',
+                    src: '*.html', 
+                    dest: 'html/temp/app/'
+                }]
+            }
+
+        },
+
+        // process test html
+        processhtml: {
+
+            app: {
+                files: [{
+                    expand: true,
+                    cwd: 'html/temp/app/',
+                    src: '*.html',
+                    dest: 'html/app/'
+                }]
             }
 
         },
@@ -72,27 +105,47 @@ module.exports = function(grunt) {
             app: {
 
                 options: {
-                    removeComments: true,
-                    collapseWhitespace: true
+                    removeComments: true, 
+                    collapseWhitespace: true,
+                    minifyJS: true,
+                    minifyCSS: true
                 },
 
-                files: {
-                    'html/app/index.html': 'html/.tmp/app/index.html'
-                }
+                files: [{
+                    expand: true,
+                    cwd: 'html/temp/app/',
+                    src: '*.html',
+                    dest: 'html/app/'
+                }]
 
             }
 
         },
 
-        // process test html
-        processhtml: {
+        // watch
+        watch: {
 
-            app: {
-                files: {
-                    'html/app/index.html': ['views/app/index.html']
-                }
+            js: {
+                files: 'assets/module/js/*.js',
+                tasks: ['concat:js']
+            },
+
+            css: {
+                files: 'assets/module/css/*.css',
+                tasks: ['concat:css']
+            },
+
+            html: {
+                files: ['views/app/*.html', 'assets/module/css/base.css'],
+                tasks: ['replace', 'processhtml']
             }
 
+        },
+
+        // jshint
+        jshint: {
+            options: {asi: true},
+            all: ['Gruntfile.js', 'assets/app/*.js', 'assets/module/js/*.js']
         }
 
     });
@@ -103,13 +156,13 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-processhtml');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
     // for production 
-    grunt.registerTask('app', ['uglify:app']);
-    grunt.registerTask('css', ['cssmin:app']);
-    grunt.registerTask('html', ['replace:app', 'htmlmin:app']);
-    grunt.registerTask('all', ['uglify:app', 'cssmin:app', 'replace:app', 'htmlmin:app']);
+    grunt.registerTask('default', ['jshint', 'uglify', 'cssmin', 'replace', 'htmlmin']);
 
     // for development
-    grunt.registerTask('test', ['processhtml:app']);
+    grunt.registerTask('dev', ['jshint', 'concat', 'replace', 'processhtml','watch']);
 };

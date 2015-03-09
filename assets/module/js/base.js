@@ -1,11 +1,16 @@
-// base method
+/*
+ * Utility 
+ * 
+ * bade define
+ * 
+ */
 
-var API = {
+var Util = {
 
     name: 'app',
 
-    getName: function() {
-        return this.name
-    }
+    platform: 'android',
 
-};
+    timestamp: ''
+
+}

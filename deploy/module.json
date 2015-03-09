@@ -1,0 +1,9 @@
+{
+    "js": {
+        "app": "base.js, getNmae.js, touch.js"
+    },
+
+    "css": {
+        "app.css": "global.css"
+    }
+}
