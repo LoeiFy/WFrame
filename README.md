@@ -42,7 +42,7 @@ npm install grunt-contrib-jshint --save-dev
 - for production `grunt`
 - for development `grunt dev`
 
-#### Next
+#### An example
 you will need a `web server`, visit `/html/app/app.html`
 
 ## Introduction
@@ -95,7 +95,7 @@ npm install grunt-contrib-jshint --save-dev
 - 线上部署 `grunt`
 - 本地开发 `grunt dev`
 
-#### 接下来
+#### 一个例子
 你需要一个本地 `web 服务器`, 然后访问 `/html/app/app.html`
 
 ## 说明
