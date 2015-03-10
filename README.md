@@ -1,68 +1,54 @@
-# WFrame - A font-end frame base on grunt & basket.js
+# WFrame 
+A font-end frame base on grunt & basket.js
+### Directory / Files Description
 
-## example project 
- 
-http://lorem.in
+```
+/
+├
+├── assets
+│   └── app                 	main develop js / css
+│   └── module              	css / js modules, images etc
+├
+├── deploy
+│   └── module.json          	main develop app module define
+│   └── version.json          	your app assets version
+├
+├── dist                   		js / css generate by grunt
+├
+├── html                      	html generate by grunt
+├
+├── static                    	basket.js
+├
+├── views                     	your app develop html, not directly web access
+├
+├── Gruntfile.js              	                      
+├── package.json                
+```
+### How to Use
+check out the [Getting Started](http://gruntjs.com/getting-started) guide
+#### Install grunt plugins
+```bash
+npm install grunt --save-dev
+npm install grunt-contrib-uglify --save-dev
+npm install grunt-contrib-cssmin --save-dev
+npm install grunt-contrib-htmlmin --save-dev
+npm install grunt-processhtml --save-dev
+npm install grunt-contrib-concat --save-dev
+npm install grunt-replace --save-dev
+npm install grunt-contrib-watch --save-dev
+npm install grunt-contrib-jshint --save-dev
+```
+#### Run Grunt with
+- for production ------- `grunt`
+- for development ------- `grunt dev`
 
-________________________________________________________
+#### next
+you will need a `web server`, visit `/html/app/app.html`
 
+### Introduction
+[Basket.js](https://github.com/addyosmani/basket.js/) is a script and resource loader for caching and loading scripts using localStorage. but when we develop app on local environment, js / css assets should not minify and use normal loading mode. grunt concat and watch plugins can do that.
 
-`mobile app(webview)`
+### License
+MIT
 
-- improve performance -- for production : grunt merge minfy js css files and basket.js caches script and css files width localstorage
-
-- develop easy -- for development : js and css files separate and use normal Loading mode
-
-## Directory / File Description
-
-`assets/` ------- your develop js css
-
-`assets/app/` ------- your app js css
-
-`assets/module/` ------- base js css module etc. 
-
-`static/` ------ js plugins，image files, basket.js
-
-`views/` ------- app develop html
-
-`module.json` ------- js css module define, for grunt deploy
-
-`ver.json` ------ app version define
-
-
-## Grunt Generate Directories Description
-
-`dist/` ------- merge minify js css
-
-`html/` ------- grunt replace minify html or grunt develop html
-
-
-## A Example
-
-visit： `/html/app/index.html`
-
-- for production ------- `grunt all`
-
-- for development ------- `grunt test`
-
-##### note:
-
-in mobile webview,
-
-you will note that page display without style and then soon with style (blink) if you do not define some css in `assets/module/base.css`
-
-## Power By
-
-`grunt` ------- http://gruntjs.com/
-
-`basket.js` ------- http://addyosmani.github.io/basket.js/
-
-##### note
-
-this frame is bulid for small, medium or personal project 
-
-
-________________________________________________________
-
-* sorry that my english is poor
 
