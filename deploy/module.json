@@ -1,6 +1,6 @@
 {
     "js": {
-        "app": "base.js, getNmae.js, touch.js"
+        "app": "base.js, getName.js, touch.js"
     },
 
     "css": {

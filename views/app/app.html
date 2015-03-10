@@ -23,7 +23,7 @@
     <style>@@style</style>
     <script src="/static/basket/basket.js?000"></script>
     <script>
-        basket.require({url:'/dist/css/global.css',key:'css',unique:@@css,execute:false})
+        basket.require({url:'/dist/app/app.css',key:'css',unique:@@css,execute:false})
         .then(function(responses) {
             _stylesheet.appendStyleSheet(responses[0], function() {
                 basket.require({url:'/dist/app/app.js',key:'js',unique:@@js})
@@ -33,7 +33,7 @@
     <!-- /build -->
 </head>
 <body>
-    <h1>test page</h1>
+    <h1>touch or hover to change color</h1>
     <div class="app">one</div>
     <div class="app">two</div>
     <div class="app">three</div>

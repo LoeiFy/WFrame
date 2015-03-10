@@ -126,12 +126,12 @@ module.exports = function(grunt) {
         watch: {
 
             js: {
-                files: 'assets/module/js/*.js',
+                files: ['assets/module/js/*.js', 'deploy/module.json'],
                 tasks: ['concat:js']
             },
 
             css: {
-                files: 'assets/module/css/*.css',
+                files: ['assets/module/css/*.css', 'deploy/module.json'],
                 tasks: ['concat:css']
             },
 
