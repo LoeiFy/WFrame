@@ -28,15 +28,7 @@ A font-end frame base on grunt & basket.js
 check out the [Getting Started](http://gruntjs.com/getting-started) guide
 #### Install grunt plugins
 ```bash
-npm install grunt --save-dev
-npm install grunt-contrib-uglify --save-dev
-npm install grunt-contrib-cssmin --save-dev
-npm install grunt-contrib-htmlmin --save-dev
-npm install grunt-processhtml --save-dev
-npm install grunt-contrib-concat --save-dev
-npm install grunt-replace --save-dev
-npm install grunt-contrib-watch --save-dev
-npm install grunt-contrib-jshint --save-dev
+npm install
 ```
 #### Run Grunt with
 - for production `grunt`
@@ -81,15 +73,7 @@ MIT
 查看 [安装 grunt](http://gruntjs.com/getting-started) 说明
 #### 安装相关 grunt 插件
 ```bash
-npm install grunt --save-dev
-npm install grunt-contrib-uglify --save-dev
-npm install grunt-contrib-cssmin --save-dev
-npm install grunt-contrib-htmlmin --save-dev
-npm install grunt-processhtml --save-dev
-npm install grunt-contrib-concat --save-dev
-npm install grunt-replace --save-dev
-npm install grunt-contrib-watch --save-dev
-npm install grunt-contrib-jshint --save-dev
+npm install
 ```
 #### 相关 grunt 命令
 - 线上部署 `grunt`
