@@ -1,9 +1,0 @@
-{
-    "js": {
-        "app": "base.js, getName.js, touch.js"
-    },
-
-    "css": {
-        "app": "app.css, global.css"
-    }
-}
