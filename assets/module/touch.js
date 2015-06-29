@@ -1,13 +1,4 @@
-/*
- * touch event
- * 
- * @param   {string}    tags     touch class    
- * 
- */
-
-Util.touch = function(tags) {
-
-    tags = document.getElementsByClassName(tags);
+function(tags) {
 
     for (var i = 0; i < tags.length; i ++) {
 
