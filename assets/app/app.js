@@ -1,21 +1,13 @@
-var ready = function(callback) {
+var $ = @@include('base.js');
 
-    if (/complete|loaded|interactive/.test(document.readyState) && document.body) {
+$.ready(function() {
 
-        callback()
-
-    } else {
-
-        document.addEventListener('DOMContentLoaded', function(){ callback() }, false)
-
-    }
-
-}
-
-ready(function() {
-
-    Util.touch('app')
-
-    alert('this is a '+ Util.getName() +' test!')
+    $('.app')
+    .on('touchstart mouseover', function() {
+        $(this).addClass('active')
+    })
+    .on('touchmove touchend touchcancle mouseout', function() {
+        $(this).removeClass('active')
+    })
 
 })
