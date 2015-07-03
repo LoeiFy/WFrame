@@ -13,14 +13,14 @@ function(_this) {
             break;
             case '.': 
                 var all = document.getElementsByClassName(s.substring(1))
-                for(var i = 0; i < all.length; i ++){
+                for (var i = 0; i < all.length; i ++) {
                     this.elements.push(all[i])
                 }
                 return this;
             break;
             default:
                 var tags = document.getElementsByTagName(s)
-                for(var i = 0; i < tags.length; i ++){
+                for (var i = 0; i < tags.length; i ++) {
                     this.elements.push(tags[i])
                 }
                 return this;
@@ -43,7 +43,7 @@ function(_this) {
         if (/complete|loaded|interactive/.test(document.readyState) && document.body) {
             fn
         } else {
-            document.addEventListener('DOMContentLoaded', function(){ fn }, false)
+            document.addEventListener('DOMContentLoaded', fn, false)
         }
     }
 
@@ -64,4 +64,4 @@ function(_this) {
 
     return new base().dom(_this)
 
-};
+}

@@ -1,7 +1,0 @@
-body, h1, div {
-    margin: 0;
-    padding: 0;
-}
-div, h1 {
-    visibility: visible !important;
-}
