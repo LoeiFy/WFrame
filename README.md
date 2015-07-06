@@ -23,12 +23,14 @@ A font-end frame base on gulp
 ## How to Use
 gulp [Getting Started](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md)
 
+get [livereload](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei)
+
 ```bash
-npm i gulp -g
+sudo npm i gulp -g
 cd WFrame
 npm install
-npm i livereload -g
-npm i weinre -g
+sudo npm i livereload -g
+sudo npm i weinre -g
 weinre --help
 ```
 

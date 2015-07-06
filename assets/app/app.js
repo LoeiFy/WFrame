@@ -1,14 +1,14 @@
 
 var $ = @@include('base.js')
 
-$.ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
 
-    $('.app')
-    .on('touchstart mouseover', function() {
-        $(this).addClass('active')
+    $('.app').on('touchstart mouseover', function() {
+        this.classList.add('active')
     })
-    .on('touchmove touchend touchcancle mouseout', function() {
-        $(this).removeClass('active')
+    
+    $('.app').on('touchmove touchend touchcancle mouseout', function() {
+        this.classList.remove('active')
     })
 
 })
