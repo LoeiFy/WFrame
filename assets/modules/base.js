@@ -1,9 +1,8 @@
-function(_this) {
+function(s) {
 
-    function base() {
+    function base(s) {
         this.elements = [];
 
-        this.dom = function(s) {
         if (typeof(s) === 'string') {
             switch(s.charAt(0)){
                 case '#': 
@@ -30,7 +29,6 @@ function(_this) {
         if (s === null) {
             return this
         }
-        }
 
     }
 
@@ -44,6 +42,6 @@ function(_this) {
         }
     }
 
-    return new base().dom(_this)
+    return new base(s)
 
 };
