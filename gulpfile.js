@@ -18,9 +18,9 @@ var env = process.env.mode;
 var version = '';
 
 gulp.task('js', function() {
-    return gulp.src(['assets/*/*.js', '!assets/module/*.js'])
+    return gulp.src(['assets/*/*.js', '!assets/modules/*.js'])
         .pipe(fileinclude({
-            basepath: 'assets/module/'
+            basepath: 'assets/modules/'
         }))
         .pipe(gulpif(env !== 'dev', jsmin()))
         .pipe(gulp.dest('dist/'))
@@ -55,9 +55,9 @@ gulp.task('jshint', ['js'], function() {
 gulp.task('javascript', ['js', 'jshint'])
 
 gulp.task('css', function() {
-    gulp.src(['assets/*/*.css', '!assets/module/*.css'])
+    gulp.src(['assets/*/*.css', '!assets/modules/*.css'])
         .pipe(fileinclude({
-            basepath: 'assets/module/'
+            basepath: 'assets/modules/'
         }))
         .pipe(gulpif(env !== 'dev', cssmin()))
         .pipe(gulp.dest('dist/'))
@@ -89,14 +89,14 @@ gulp.task('replace', ['md5'], function() {
     version = '{'+ version +'}';
     version = JSON.parse(version);
 
-    gulp.src(['templates/*/*.html', '!templates/module/*.html'])
+    gulp.src(['templates/*/*.html', '!templates/modules/*.html'])
         .pipe(replace({
             patterns: [{
                 json: version
             }]
         }))
         .pipe(fileinclude({
-            basepath: 'templates/module/'
+            basepath: 'templates/modules/'
         }))
         .pipe(gulpif(env !== 'dev', htmlmin({
             removeComments: true, 

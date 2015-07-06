@@ -1,4 +1,5 @@
-var $ = @@include('base.js');
+
+var $ = @@include('base.js')
 
 $.ready(function() {
 

@@ -9,23 +9,20 @@ function(_this) {
         switch(s.charAt(0)){
             case '#': 
                 this.elements.push(document.getElementById(s.substring(1))) 
-                return this;
             break;
             case '.': 
                 var all = document.getElementsByClassName(s.substring(1))
                 for (var i = 0; i < all.length; i ++) {
                     this.elements.push(all[i])
                 }
-                return this;
             break;
             default:
                 var tags = document.getElementsByTagName(s)
-                for (var i = 0; i < tags.length; i ++) {
-                    this.elements.push(tags[i])
+                for (var j = 0; j < tags.length; j ++) {
+                    this.elements.push(tags[j])
                 }
-                return this;
-            break;
         }
+        return this;
     }
 
     // events
@@ -41,9 +38,9 @@ function(_this) {
     // dom ready
     base.prototype.ready = function(fn) {
         if (/complete|loaded|interactive/.test(document.readyState) && document.body) {
-            fn
+            fn()
         } else {
-            document.addEventListener('DOMContentLoaded', fn, false)
+            document.addEventListener('DOMContentLoaded', function() { fn() }, false)
         }
     }
 
@@ -64,4 +61,4 @@ function(_this) {
 
     return new base().dom(_this)
 
-}
+};
