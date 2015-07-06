@@ -1,6 +1,5 @@
 
 var gulp = require('gulp'),
-    version = require('./version.json'),
     fileinclude = require('gulp-file-include'),
     jsmin = require('gulp-uglify'),
     cssmin = require('gulp-minify-css'),
@@ -9,10 +8,14 @@ var gulp = require('gulp'),
     map = require('map-stream'),
     jshint = require('gulp-jshint'),
     insert = require('gulp-insert'),
+    md5 = require('md5-file'),
     gulpif = require('gulp-if');
 
 // define dev: $ mode=dev gulp
 var env = process.env.mode;
+
+// md5 file json
+var version = '';
 
 gulp.task('js', function() {
     return gulp.src(['assets/*/*.js', '!assets/module/*.js'])
@@ -60,15 +63,40 @@ gulp.task('css', function() {
         .pipe(gulp.dest('dist/'))
 })
 
-gulp.task('html', function() {
-    gulp.src(['views/*/*.html', '!views/module/*.html'])
+gulp.task('md5', ['js', 'css'], function() {
+    version = '';
+    return gulp.src(['dist/*/*.js', 'dist/*/*.css'])
+        .pipe(map(function(file, cb) {
+            var f = file.path;
+            
+            var origin = f.substring(f.indexOf('dist') - 1, f.length);
+
+            if ((env === 'dev')) {
+                var content = '"'+ origin +'":"'+ origin +'",';
+            } else {
+                var after = origin +'?'+ md5(f),
+                    content = '"'+ origin +'":"'+ after +'",';
+            }
+
+            version += content;
+
+            cb(null, file)
+        }))
+})
+
+gulp.task('replace', ['md5'], function() {
+    version = version.substring(0, version.length - 1);
+    version = '{'+ version +'}';
+    version = JSON.parse(version);
+
+    gulp.src(['templates/*/*.html', '!templates/module/*.html'])
         .pipe(replace({
             patterns: [{
                 json: version
             }]
         }))
         .pipe(fileinclude({
-            basepath: 'views/module/'
+            basepath: 'templates/module/'
         }))
         .pipe(gulpif(env !== 'dev', htmlmin({
             removeComments: true, 
@@ -76,6 +104,8 @@ gulp.task('html', function() {
         })))
         .pipe(gulp.dest('html/'))
 })
+
+gulp.task('html', ['md5', 'replace'])
 
 gulp.task('watch', ['javascript', 'css', 'html'], function() {
     if (env !== 'dev') return;
@@ -86,7 +116,7 @@ gulp.task('watch', ['javascript', 'css', 'html'], function() {
     var css = gulp.watch('assets/*/*.css', ['css']);
     css.on('change', function(event) { log(event) })
 
-    var html = gulp.watch('views/*/*.html', ['html']);
+    var html = gulp.watch('templates/*/*.html', ['html']);
     html.on('change', function(event) { log(event) })
 
     function log(e) { console.log('File ' + e.path + ' was ' + e.type + ', running tasks...') }

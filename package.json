@@ -12,6 +12,7 @@
     "gulp-if": "~1.2.5",
     "gulp-insert": "~0.4.0",
     "map-stream": "~0.0.5",
+    "md5-file": "~2.0.3",
     "gulp-jshint": "~1.11.0"
   },
   "repository": {
