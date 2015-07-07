@@ -1,21 +1,21 @@
 # WFrame 
-A font-end frame base on gulp
+A font-end frame base on gulp. (and liveReload, weinre )
 ## Directory / Files Description
 
 ```
 /
 ├
-├── assets						develop assets
-│   └── app						your app
-│   └── modules					css / js modules
+├── assets                 develop assets
+│   └── app                your app
+│   └── modules            css / js modules
 ├
-├── dist						js / css generate by gulp
+├── dist                   js / css generate by gulp
 ├
-├── html						html generate by gulp
+├── html                   html generate by gulp
 ├
-├── templates					develop html
-│   └── app						your app
-│   └── modules					html modules
+├── templates              develop html
+│   └── app                your app
+│   └── modules            html modules
 ├
 ├── gulpfile.js              	                      
 ├── package.json                
@@ -223,7 +223,48 @@ alert("(error) dist/app/app.js: line 59, col 18, if (i = 5) { , Expected a condi
 ### Compress js / css assets and html
 
 It will generate js, css, html min file for production deploy
- 
+
+### Automatic generate development files
+
+When run `mode=dev gulp`, it will generate your files and check js errors automatic
+
+### Other features
+
+- `liveReload` monitors changes in the file system. As soon as you save a file, it is preprocessed as needed, and the browser is refreshed.
+
+```bash
+cd WFrame
+livereload dist html
+```
+
+- `weinre` for mobile dubug
+
+```bash
+# configure weinre host
+weinre --boundHost [your ip]
+```
+
+```js
+// an example: define a debug module
+
+var i = 0;
+$('id').on('click', function() {
+	i ++;
+    if (i == 5) {
+    	i = 0;
+
+        var ip = prompt('your ip', '');
+        if (!ip) return;
+
+        var e = document.createElement('script');
+        e.setAttribute('src', 'http://'+ ip +':8080/target/target-script-min.js')
+        document.getElementsByTagName('body')[0].appendChild(e)
+    }
+})
+```
+now your can debug your mobile app:
+
+`http://[your ip]:8080/client/#anonymous`
 
 ## License
 MIT
