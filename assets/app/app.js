@@ -1,9 +1,10 @@
+// var $ = ...
+@@include('base.js', {"def": "$"})
 
-var $ = @@include('base.js')
+// var debug = ...
+@@include('debug.js', {"def": "debug"})
 
 document.addEventListener('DOMContentLoaded', function() {
-
-var debug = @@include('debug.js')
 
     debug('h1')
 

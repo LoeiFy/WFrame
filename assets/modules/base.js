@@ -1,4 +1,4 @@
-function(s) {
+var @@def = function(s) {
 
     function base(s) {
         this.elements = [];

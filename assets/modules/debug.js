@@ -1,4 +1,4 @@
-function(s) {
+var @@def = function(s) {
 
     var i = 0;
 
