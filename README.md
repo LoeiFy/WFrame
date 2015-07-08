@@ -3,8 +3,6 @@ A font-end frame base on gulp. (and liveReload, weinre )
 ## Directory / Files Description
 
 ```
-/
-├
 ├── assets                 develop assets
 │   └── app                your app
 │   └── modules            css / js modules
@@ -230,7 +228,9 @@ When run `mode=dev gulp`, it will generate your files and check js errors automa
 
 ### Other features
 
-- `liveReload` monitors changes in the file system. As soon as you save a file, it is preprocessed as needed, and the browser is refreshed.
+- `liveReload` monitors changes in the file system. As soon as you save a file, it is preprocessed as needed, and the browser is refreshed. 
+
+install chrome extension [livereload](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei) first
 
 ```bash
 cd WFrame
