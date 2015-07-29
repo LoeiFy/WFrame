@@ -130,9 +130,9 @@ html:
 
 <meta charset="utf-8" />
 <title>@@title</title>
-<meta name="format-detection" content="telephone=no; date=no; address=no; email=no">
+<meta name="format-detection" content="telephone=no; date=no; address=no; email=no" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
-<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<link rel="icon" href="data:;base64,iVBORw0KGgo=" />
 <link rel="stylesheet" href="@@css" />
 ```
 
@@ -151,7 +151,7 @@ html:
 
 @@include('header.html', {
     "title": "APP DEMO",
-    "css": "@@/dist/app/app.css"
+    "css": "/dist/@@app/app.css"
 })
 
 </head>
@@ -163,7 +163,7 @@ html:
 <div class="app"></div>
 
 @@include('footer.html', {
-    "js": "@@/dist/app/app.js"
+    "js": "/dist/@@app/app.js"
 })
 </body>
 </html>
@@ -178,9 +178,9 @@ and the result is:
 
 <meta charset="utf-8" />
 <title>APP DEMO</title>
-<meta name="format-detection" content="telephone=no; date=no; address=no; email=no">
+<meta name="format-detection" content="telephone=no; date=no; address=no; email=no" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
-<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<link rel="icon" href="data:;base64,iVBORw0KGgo=" />
 <link rel="stylesheet" href="/dist/app/app.css" />
 
 
@@ -201,11 +201,11 @@ and the result is:
 ### Generate assets MD5 version automatic
 
 ```html
-<!-- app.css MD5 timestamp --> 
-<link rel="stylesheet" href="/dist/app/app.css?9a8bd5e6fd21c883e0c5e3ab7e37a171">
+<!-- app.css MD5 version --> 
+<link rel="stylesheet" href="/dist/app/app.9a8bd5e6fd21c883e0c5e3ab7e37a171.css">
 
-<!-- app.js MD5 timestamp -->
-<script src="/dist/app/app.js?0103f9dcd3e1493452f217064e17f12e"></script>
+<!-- app.js MD5 version -->
+<script src="/dist/app/app.0103f9dcd3e1493452f217064e17f12e.js"></script>
 ```
 
 ### Jshint error automatic reminders
@@ -407,9 +407,9 @@ html:
 
 <meta charset="utf-8" />
 <title>@@title</title>
-<meta name="format-detection" content="telephone=no; date=no; address=no; email=no">
+<meta name="format-detection" content="telephone=no; date=no; address=no; email=no" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
-<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<link rel="icon" href="data:;base64,iVBORw0KGgo=" />
 <link rel="stylesheet" href="@@css" />
 ```
 
@@ -428,7 +428,7 @@ html:
 
 @@include('header.html', {
     "title": "APP DEMO",
-    "css": "@@/dist/app/app.css"
+    "css": "/dist/@@app/app.css"
 })
 
 </head>
@@ -440,7 +440,7 @@ html:
 <div class="app"></div>
 
 @@include('footer.html', {
-    "js": "@@/dist/app/app.js"
+    "js": "@@/dist/@@app/app.js"
 })
 </body>
 </html>
@@ -455,9 +455,9 @@ html:
 
 <meta charset="utf-8" />
 <title>APP DEMO</title>
-<meta name="format-detection" content="telephone=no; date=no; address=no; email=no">
+<meta name="format-detection" content="telephone=no; date=no; address=no; email=no" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
-<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<link rel="icon" href="data:;base64,iVBORw0KGgo=" />
 <link rel="stylesheet" href="/dist/app/app.css" />
 
 
@@ -475,14 +475,14 @@ html:
 </html>
 ```
 
-### 2.可以自动生成 MD5 版本号
+### 2.可以自动生成 MD5 版本
 
 ```html
-<!-- app.css MD5 timestamp --> 
-<link rel="stylesheet" href="/dist/app/app.css?9a8bd5e6fd21c883e0c5e3ab7e37a171">
+<!-- app.css MD5 version --> 
+<link rel="stylesheet" href="/dist/app/app.9a8bd5e6fd21c883e0c5e3ab7e37a171.css">
 
-<!-- app.js MD5 timestamp -->
-<script src="/dist/app/app.js?0103f9dcd3e1493452f217064e17f12e"></script>
+<!-- app.js MD5 version -->
+<script src="/dist/app/app.0103f9dcd3e1493452f217064e17f12e.js"></script>
 ```
 
 ### 3.自动添加 jshint 出错信息提醒
