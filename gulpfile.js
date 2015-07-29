@@ -8,21 +8,35 @@ var gulp = require('gulp'),
     map = require('map-stream'),
     jshint = require('gulp-jshint'),
     insert = require('gulp-insert'),
-    md5 = require('md5-file'),
+    RevAll = require('gulp-rev-all'),
     gulpif = require('gulp-if');
 
 // define dev: $ mode=dev gulp
 var env = process.env.mode;
 
-// md5 file json
-var version = '';
-
 gulp.task('js', function() {
+    var revAll = new RevAll({fileNameManifest: 'js.json', hashLength: 32});
     return gulp.src(['assets/*/*.js', '!assets/modules/*.js'])
         .pipe(fileinclude({
             basepath: 'assets/modules/'
         }))
         .pipe(gulpif(env !== 'dev', jsmin()))
+        .pipe(revAll.revision())
+        .pipe(gulp.dest('dist/'))
+        .pipe(revAll.manifestFile())
+        .pipe(gulp.dest('dist/'))
+})
+
+gulp.task('css', function() {
+    var revAll = new RevAll({fileNameManifest: 'css.json', hashLength: 32});
+    gulp.src(['assets/*/*.css', '!assets/modules/*.css'])
+        .pipe(fileinclude({
+            basepath: 'assets/modules/'
+        }))
+        .pipe(gulpif(env !== 'dev', cssmin()))
+        .pipe(revAll.revision())
+        .pipe(gulp.dest('dist/'))
+        .pipe(revAll.manifestFile())
         .pipe(gulp.dest('dist/'))
 })
 
@@ -53,36 +67,6 @@ gulp.task('jshint', ['js'], function() {
 })
 
 gulp.task('javascript', ['js', 'jshint'])
-
-gulp.task('css', function() {
-    gulp.src(['assets/*/*.css', '!assets/modules/*.css'])
-        .pipe(fileinclude({
-            basepath: 'assets/modules/'
-        }))
-        .pipe(gulpif(env !== 'dev', cssmin()))
-        .pipe(gulp.dest('dist/'))
-})
-
-gulp.task('md5', ['js', 'css'], function() {
-    version = '';
-    return gulp.src(['dist/*/*.js', 'dist/*/*.css'])
-        .pipe(map(function(file, cb) {
-            var f = file.path;
-            
-            var origin = f.substring(f.indexOf('dist') - 1, f.length);
-
-            if ((env === 'dev')) {
-                var content = '"'+ origin +'":"'+ origin +'",';
-            } else {
-                var after = origin +'?'+ md5(f),
-                    content = '"'+ origin +'":"'+ after +'",';
-            }
-
-            version += content;
-
-            cb(null, file)
-        }))
-})
 
 gulp.task('replace', ['md5'], function() {
     version = version.substring(0, version.length - 1);
