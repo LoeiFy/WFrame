@@ -16,7 +16,11 @@ var gulp = require('gulp'),
 var env = process.env.mode;
 
 gulp.task('js', function() {
-    var revAll = new RevAll({fileNameManifest: 'js.json', hashLength: 32});
+    if (env === 'dev') {
+        var revAll = new RevAll({fileNameManifest: 'js.json', dontRenameFile: ['.js']});
+    } else {
+        var revAll = new RevAll({fileNameManifest: 'js.json', hashLength: 32});
+    }
     return gulp.src(['assets/*/*.js', '!assets/modules/*.js'])
         .pipe(fileinclude({
             basepath: 'assets/modules/'
@@ -29,7 +33,11 @@ gulp.task('js', function() {
 })
 
 gulp.task('css', function() {
-    var revAll = new RevAll({fileNameManifest: 'css.json', hashLength: 32});
+    if (env === 'dev') {
+        var revAll = new RevAll({fileNameManifest: 'css.json', dontRenameFile: ['.css']});
+    } else {
+        var revAll = new RevAll({fileNameManifest: 'css.json', hashLength: 32});
+    }
     gulp.src(['assets/*/*.css', '!assets/modules/*.css'])
         .pipe(fileinclude({
             basepath: 'assets/modules/'
@@ -91,13 +99,13 @@ gulp.task('watch', ['javascript', 'css', 'replace'], function() {
     if (env !== 'dev') return;
 
     var js = gulp.watch('assets/*/*.js', ['javascript']);
-    js.on('change', function(event) { log(event) })
+    js.on('change', function(e) { log(e) })
 
     var css = gulp.watch('assets/*/*.css', ['css']);
-    css.on('change', function(event) { log(event) })
+    css.on('change', function(e) { log(e) })
 
-    var html = gulp.watch('templates/*/*.html', ['html']);
-    html.on('change', function(event) { log(event) })
+    var html = gulp.watch('templates/*/*.html', ['replace']);
+    html.on('change', function(e) { log(e) })
 
     function log(e) { console.log('File ' + e.path + ' was ' + e.type + ', running tasks...') }
 })
