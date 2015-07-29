@@ -52,7 +52,7 @@ gulp.task('css', function() {
 gulp.task('jshint', ['js'], function() {
     if (env !== 'dev') return;
 
-    return gulp.src('dist/*/*.js')
+    return gulp.src(['dist/*/*.js', '!dist/*/*.*.js'])
         .pipe(jshint({ asi: true }))
         .pipe(map(function(file, cb) {
             if (!file.jshint.success) {
@@ -75,14 +75,12 @@ gulp.task('jshint', ['js'], function() {
         }))
 })
 
-gulp.task('javascript', ['js', 'jshint'])
-
 gulp.task('replace', ['js', 'css'], function() {
     gulp.src(['templates/*/*.html', '!templates/modules/*.html'])
         .pipe(replace({
             patterns: [
                 { json: JSON.parse(fs.readFileSync('dist/css.json')) },
-                { json: JSON.parse(fs.readFileSync('dist/js.json')) },
+                { json: JSON.parse(fs.readFileSync('dist/js.json')) }
             ]
         }))
         .pipe(fileinclude({
@@ -95,10 +93,10 @@ gulp.task('replace', ['js', 'css'], function() {
         .pipe(gulp.dest('html/'))
 })
 
-gulp.task('watch', ['javascript', 'css', 'replace'], function() {
+gulp.task('watch', ['jshint', 'css', 'replace'], function() {
     if (env !== 'dev') return;
 
-    var js = gulp.watch('assets/*/*.js', ['javascript']);
+    var js = gulp.watch('assets/*/*.js', ['jshint']);
     js.on('change', function(e) { log(e) })
 
     var css = gulp.watch('assets/*/*.css', ['css']);
@@ -110,4 +108,4 @@ gulp.task('watch', ['javascript', 'css', 'replace'], function() {
     function log(e) { console.log('File ' + e.path + ' was ' + e.type + ', running tasks...') }
 })
 
-gulp.task('default', ['javascript', 'css', 'replace', 'watch'])
+gulp.task('default', ['jshint', 'css', 'replace', 'watch'])
