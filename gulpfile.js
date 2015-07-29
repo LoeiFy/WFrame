@@ -1,5 +1,6 @@
 
 var gulp = require('gulp'),
+    fs = require('fs'),
     fileinclude = require('gulp-file-include'),
     jsmin = require('gulp-uglify'),
     cssmin = require('gulp-minify-css'),
@@ -68,16 +69,13 @@ gulp.task('jshint', ['js'], function() {
 
 gulp.task('javascript', ['js', 'jshint'])
 
-gulp.task('replace', ['md5'], function() {
-    version = version.substring(0, version.length - 1);
-    version = '{'+ version +'}';
-    version = JSON.parse(version);
-
+gulp.task('replace', ['js', 'css'], function() {
     gulp.src(['templates/*/*.html', '!templates/modules/*.html'])
         .pipe(replace({
-            patterns: [{
-                json: version
-            }]
+            patterns: [
+                { json: JSON.parse(fs.readFileSync('dist/css.json')) },
+                { json: JSON.parse(fs.readFileSync('dist/js.json')) },
+            ]
         }))
         .pipe(fileinclude({
             basepath: 'templates/modules/'
