@@ -87,9 +87,7 @@ gulp.task('replace', ['js', 'css'], function() {
         .pipe(gulp.dest('html/'))
 })
 
-gulp.task('html', ['md5', 'replace'])
-
-gulp.task('watch', ['javascript', 'css', 'html'], function() {
+gulp.task('watch', ['javascript', 'css', 'replace'], function() {
     if (env !== 'dev') return;
 
     var js = gulp.watch('assets/*/*.js', ['javascript']);
@@ -104,4 +102,4 @@ gulp.task('watch', ['javascript', 'css', 'html'], function() {
     function log(e) { console.log('File ' + e.path + ' was ' + e.type + ', running tasks...') }
 })
 
-gulp.task('default', ['javascript', 'css', 'html', 'watch'])
+gulp.task('default', ['javascript', 'css', 'replace', 'watch'])
